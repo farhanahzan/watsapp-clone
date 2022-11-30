@@ -13,7 +13,7 @@ import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import IconButton from '@mui/material/IconButton';
 
 function ChatTop({roomData, messages}) {
-  console.log('message', messages)
+  //console.log('message', messages)
   return (
     <>
       <Grid item xs={8} >
@@ -49,7 +49,7 @@ function ChatTop({roomData, messages}) {
             }
             subheader={
               <Typography noWrap={true} sx={{ fontWeight: 400, fontSize: 14,color:"primary.contrastText" }}>
-                last seen {new Date(messages[messages.length-1]?.timestamp?.toDate()).toUTCString()}
+                last seen {messages.length>0? new Date(messages[messages.length-1]?.timestamp?.toDate()).toUTCString():"not available"}
               </Typography>
             }
           />

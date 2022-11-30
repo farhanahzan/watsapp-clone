@@ -31,7 +31,7 @@ function SideBar() {
       clearTimeout();
     };
   }, []);
-  console.log(loading);
+  
   return (
     <Grid container>
       <Grid item xs={12} display="flex" alignItems="center" sx={{bgcolor:"primary.dark" , px:2, height:'12vh'}}>

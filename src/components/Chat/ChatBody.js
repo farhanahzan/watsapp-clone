@@ -26,23 +26,24 @@ function ChatBody({ messages }) {
               variant="subtitle2"
               align="left"
               sx={{
+                fontSize:'12px',
                 fontWeight: 600,
                 borderBottom: '1px solid',
                 borderBottomColor: '#f1f1f1',
-                color: 'hover.main',
+                color: 'primary.main',
               }}
             >
               {msg.name}
             </Typography>
 
-            <Typography variant="subtitle1">{msg.message} </Typography>
+            <Typography variant="subtitle1" sx={{fontWeight: 600,color:'hover.main'}}>{msg.message} </Typography>
             <Typography
               variant="body1"
               align="right"
               sx={{ fontSize: '12px', fontWeight: 600, color: 'hover.light' }}
             >
               {new Date(
-                messages[messages.length - 1]?.timestamp?.toDate()
+                msg?.timestamp?.toDate()
               ).toLocaleTimeString()}
             </Typography>
           </Paper>

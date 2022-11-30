@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 
 import Avatar from '@mui/material/Avatar';
@@ -6,11 +6,25 @@ import DonutLargeRoundedIcon from '@mui/icons-material/DonutLargeRounded';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
 import IconButton from '@mui/material/IconButton';
-
+import AddRoom from './AddRoom/AddRoom';
 function SideBarTop() {
+  const [showAddRoom, setShowAddRoom] = useState(true);
+  const [show, setShow] = useState(false)
+  const handleAddRoom = () => {
+    setShowAddRoom(true);
+    setShow(true)
+   
+  };
+ 
+  useEffect(() => {
+    setShowAddRoom(false);
+    setShow(!show)
+  }, [showAddRoom]);
+
   return (
     <>
-    <Grid item xs={2} >
+      {show ?  <AddRoom clicked={true}/>:null}
+      <Grid item xs={2}>
         <Avatar
           sx={{
             border: 1,
@@ -36,7 +50,7 @@ function SideBarTop() {
         <IconButton color="inherit">
           <DonutLargeRoundedIcon sx={{ color: 'secondary.light' }} />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={handleAddRoom}>
           <AddRoundedIcon sx={{ color: 'secondary.light' }} />
         </IconButton>
         <IconButton>
@@ -44,7 +58,7 @@ function SideBarTop() {
         </IconButton>
       </Grid>
     </>
-  )
+  );
 }
 
-export default SideBarTop
+export default SideBarTop;
