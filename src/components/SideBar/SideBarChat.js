@@ -7,6 +7,7 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Skeleton from '@mui/material/Skeleton';
 import { db } from '../../firebase';
+import { Link } from 'react-router-dom';
 
 function SideBarChat({ id, name, photo, loading }) {
   const [message, setMessage] = useState('');
@@ -21,17 +22,16 @@ function SideBarChat({ id, name, photo, loading }) {
           setMessage(snapshot.docs.map((doc) => doc.data()))
         );
     }
-   
   }, [id]);
 
   return (
-    <>
+    <Link to={`/rooms/${id}`} style={{ textDecoration: 'none' }}>
       <Card
         sx={{
           borderRadius: 0,
           boxShadow: 0,
           ':hover': {
-            backgroundColor: 'neutral1.light',
+            backgroundColor: 'hover.main',
             color: 'white',
           },
         }}
@@ -68,11 +68,7 @@ function SideBarChat({ id, name, photo, loading }) {
                 style={{ marginBottom: 6 }}
               />
             ) : (
-              <Typography
-                
-                sx={{ fontWeight: 600 , fontSize:16}}
-                gutterBottom
-              >
+              <Typography noWrap={true} sx={{ fontWeight: 600, fontSize: 16 }} gutterBottom>
                 {name}
               </Typography>
             )
@@ -81,16 +77,14 @@ function SideBarChat({ id, name, photo, loading }) {
             loading ? (
               <Skeleton animation="wave" height={10} width="40%" />
             ) : (
-              <Typography
-                sx={{ fontWeight: 400, fontSize: 14 }}
-              >
+              <Typography noWrap={true} sx={{ fontWeight: 400, fontSize: 14 }}>
                 {message[0]?.message}
               </Typography>
             )
           }
         />
       </Card>
-    </>
+    </Link>
   );
 }
 

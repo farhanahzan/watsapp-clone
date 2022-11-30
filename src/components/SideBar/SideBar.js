@@ -4,7 +4,6 @@ import { db } from '../../firebase';
 import Grid from '@mui/material/Grid';
 import SideBarTop from './SideBarTop';
 import SideBarSearch from './SideBarSearch';
-import SideBarAddNew from './SideBarAddNew';
 import SideBarChat from './SideBarChat';
 
 function SideBar() {
@@ -44,7 +43,7 @@ function SideBar() {
       </Grid>
    
       <Grid item xs={12}>
-        {(loading ) && [...Array(7)].map((_,i)=><SideBarChat key={i} loading />)}
+        {(loading ) && [...Array(6)].map((_,i)=><SideBarChat key={i} loading />)}
         {rooms.map((room) => (
          show && <SideBarChat
          

@@ -1,6 +1,6 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
-import SideBarChat from '../SideBar/SideBarChat';
+
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 
@@ -12,7 +12,8 @@ import AttachFileRoundedIcon from '@mui/icons-material/AttachFileRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import IconButton from '@mui/material/IconButton';
 
-function ChatTop() {
+function ChatTop({roomData, messages}) {
+  console.log('message', messages)
   return (
     <>
       <Grid item xs={8} >
@@ -33,22 +34,22 @@ function ChatTop() {
                   width: 46,
                   height: 46,
                 }}
-                alt="name"
-                src=""
+                alt={roomData.name}
+                src={roomData.roomPhoto}
               />
             }
             title={
               <Typography
-                
+              noWrap={true}
                 sx={{ fontWeight: 400, fontSize:16, color:"primary.contrastText"}}
                 gutterBottom
               >
-                Kamal hasan fans club
+               {roomData.name}
               </Typography>
             }
             subheader={
-              <Typography sx={{ fontWeight: 400, fontSize: 14,color:"primary.contrastText" }}>
-                last seen
+              <Typography noWrap={true} sx={{ fontWeight: 400, fontSize: 14,color:"primary.contrastText" }}>
+                last seen {new Date(messages[messages.length-1]?.timestamp?.toDate()).toUTCString()}
               </Typography>
             }
           />
