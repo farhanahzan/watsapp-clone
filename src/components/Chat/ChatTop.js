@@ -12,21 +12,21 @@ import AttachFileRoundedIcon from '@mui/icons-material/AttachFileRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import IconButton from '@mui/material/IconButton';
 
-function ChatTop({roomData, messages}) {
+function ChatTop({ roomData, messages }) {
   //console.log('message', messages)
   return (
     <>
-      <Grid item xs={8} >
+      <Grid item xs={8}>
         <Card
           sx={{
             borderRadius: 0,
             boxShadow: 0,
-            bgcolor:"primary.dark",
-            padding:0
+            bgcolor: 'primary.dark',
+            padding: 0,
           }}
         >
           <CardHeader
-          sx={{padding:0}}
+            sx={{ padding: 0 }}
             avatar={
               <Avatar
                 sx={{
@@ -40,23 +40,41 @@ function ChatTop({roomData, messages}) {
             }
             title={
               <Typography
-              noWrap={true}
-                sx={{ fontWeight: 400, fontSize:16, color:"primary.contrastText"}}
+                noWrap={true}
+                sx={{
+                  fontWeight: 400,
+                  fontSize: 16,
+                  color: 'primary.contrastText',
+                }}
                 gutterBottom
               >
-               {roomData.name}
+                {roomData.name}
               </Typography>
             }
             subheader={
-              <Typography noWrap={true} sx={{ fontWeight: 400, fontSize: 14,color:"primary.contrastText" }}>
-                last seen {messages.length>0? new Date(messages[messages.length-1]?.timestamp?.toDate()).toUTCString():"not available"}
+              <Typography
+                noWrap={true}
+                sx={{
+                  fontWeight: 400,
+                  fontSize: 14,
+                  color: 'primary.contrastText',
+                }}
+              >
+                last seen{' '}
+                {messages.length > 0
+                  ? messages[messages.length - 1].timestamp
+                    ? new Date(
+                        messages[messages.length - 1]?.timestamp?.toDate()
+                      ).toUTCString()
+                    : 'Mon, 01 Jan 2022 00:00:00 GMT'
+                  : 'not available'}
               </Typography>
             }
           />
         </Card>
       </Grid>
       <Grid item xs={4} display="flex" justifyContent="flex-end">
-      <IconButton>
+        <IconButton>
           <SearchRoundedIcon sx={{ color: 'secondary.light' }} />
         </IconButton>
         <IconButton>

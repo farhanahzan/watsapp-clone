@@ -28,7 +28,7 @@ function Chat() {
         );
     }
   }, [roomId]);
- 
+
   return (
     <Grid
       container
@@ -54,8 +54,12 @@ function Chat() {
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
           py: '10px',
-          px:'10px',
+          px: '10px',
           overflowY: 'scroll',
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+          scrollbarWidth: 'none',
         }}
       >
         <ChatBody messages={messages} />

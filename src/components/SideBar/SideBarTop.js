@@ -8,22 +8,14 @@ import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
 import IconButton from '@mui/material/IconButton';
 import AddRoom from './AddRoom/AddRoom';
 function SideBarTop() {
-  const [showAddRoom, setShowAddRoom] = useState(true);
-  const [show, setShow] = useState(false)
-  const handleAddRoom = () => {
-    setShowAddRoom(true);
-    setShow(true)
-   
-  };
- 
-  useEffect(() => {
-    setShowAddRoom(false);
-    setShow(!show)
-  }, [showAddRoom]);
+  const [show, setShow] = useState(false);
 
+  const handleOpenModal = () => {
+    setShow(true);
+  };
   return (
     <>
-      {show ?  <AddRoom clicked={true}/>:null}
+      {show && <AddRoom show={show} setShow={setShow} />}
       <Grid item xs={2}>
         <Avatar
           sx={{
@@ -50,7 +42,7 @@ function SideBarTop() {
         <IconButton color="inherit">
           <DonutLargeRoundedIcon sx={{ color: 'secondary.light' }} />
         </IconButton>
-        <IconButton onClick={handleAddRoom}>
+        <IconButton onClick={handleOpenModal}>
           <AddRoundedIcon sx={{ color: 'secondary.light' }} />
         </IconButton>
         <IconButton>

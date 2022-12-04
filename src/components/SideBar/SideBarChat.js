@@ -68,7 +68,11 @@ function SideBarChat({ id, name, photo, loading }) {
                 style={{ marginBottom: 6 }}
               />
             ) : (
-              <Typography noWrap={true} sx={{ fontWeight: 600, fontSize: 16 }} gutterBottom>
+              <Typography
+                noWrap={true}
+                sx={{ fontWeight: 600, fontSize: 16 }}
+                gutterBottom
+              >
                 {name}
               </Typography>
             )
@@ -77,8 +81,21 @@ function SideBarChat({ id, name, photo, loading }) {
             loading ? (
               <Skeleton animation="wave" height={10} width="40%" />
             ) : (
-              <Typography noWrap={true} sx={{ fontWeight: 400, fontSize: 14 }}>
-                {message[0]?.message}
+              <Typography
+                sx={{
+                  fontWeight: 400,
+                  fontSize: 14,
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  width: '16vw',
+                }}
+              >
+                {message[0]?.message.includes(
+                  'https://firebasestorage.googleapis.com/v0/b/watsapp-clone-60f2d.appspot.com/o/chats'
+                )
+                  ? '🖼️ Photo'
+                  : message[0]?.message}
               </Typography>
             )
           }
