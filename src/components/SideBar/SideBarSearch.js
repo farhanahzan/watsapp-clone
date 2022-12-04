@@ -1,4 +1,4 @@
-import React ,{useState} from 'react';
+import React from 'react';
 
 import InputAdornment from '@mui/material/InputAdornment';
 import Input from '@mui/material/Input';
@@ -6,10 +6,7 @@ import FormControl from '@mui/material/FormControl';
 
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
-function SideBarSearch({query, setQuery }) {
-  
-  
- 
+function SideBarSearch({ query, setQuery }) {
   return (
     <>
       <FormControl
@@ -24,10 +21,10 @@ function SideBarSearch({query, setQuery }) {
         }}
       >
         <Input
-        value={query}
-          onChange={e=>setQuery(e.target.value)}
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
           sx={{ fontSize: 12, width: '100%' }}
-          placeholder="Search the chat"
+          placeholder="Search Room"
           type="search"
           disableUnderline={true}
           startAdornment={

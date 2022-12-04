@@ -3,12 +3,18 @@ import React from 'react';
 import Chat from './components/Chat/Chat';
 import SideBar from './components/SideBar/SideBar';
 import './App.css';
-
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './components/Login/Login';
+import Hero from './components/WelcomeScreen/Hero';
+
+export const LoginUserContext = React.createContext();
 
 const theme = createTheme({
   palette: {
@@ -53,61 +59,74 @@ const theme = createTheme({
 
 function App() {
   const [login, setLogin] = React.useState(
-    sessionStorage.getItem('user') || ''
+    sessionStorage.getItem('user')
+      ? JSON.parse(sessionStorage.getItem('user'))
+      : ''
   );
 
   return (
     <ThemeProvider theme={theme}>
-     
-        <Box
+      <Box
+        sx={{
+          flexGrow: 1,
+          backgroundImage:
+            ' radial-gradient(circle, #6ea6a9, #59959e, #458393, #337288, #22617c, #185471, #0f4766, #083a5b, #042e4f, #022343, #001937, #000b2b)',
+          height: '100vh',
+          display: 'grid',
+          placeItems: 'center',
+        }}
+      >
+        <Grid
+          container
+          item
           sx={{
-            flexGrow: 1,
-            backgroundImage:
-              ' radial-gradient(circle, #6ea6a9, #59959e, #458393, #337288, #22617c, #185471, #0f4766, #083a5b, #042e4f, #022343, #001937, #000b2b)',
-            height: '100vh',
-            display: 'grid',
-            placeItems: 'center',
+            backgroundColor: 'secondary.main',
+            height: '90vh',
+            boxShadow: 4,
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
+          sm={11}
+          md={10}
+          lg={8}
         >
-          <Grid
-            container
-            item
-            sx={{
-              backgroundColor: 'secondary.main',
-              height: '90vh',
-              boxShadow: 4,
-             
-            }}
-            sm={11}
-            md={10}
-            lg={8}
-          >
-             {login ? (
-        <Login />
-      ) : (
-            <BrowserRouter>
-              <Grid
-                item
-                xs={12}
-                sm={4.5}
-                md={4}
-                lg={4}
-                sx={{ borderRight: 1, borderColor: 'secondary.dark' }}
-              >
-                <SideBar />
-              </Grid>
-              <Grid item xs={12} sm={7.5} md={8} lg={8}>
-                <Routes>
-                  <Route path="/rooms/:roomId" element={<Chat />} />
-                  <Route path="/" element={<Chat />} />
-                  <Route path="*" element={<Chat />} />
-                </Routes>
-              </Grid>
-            </BrowserRouter>
-      )}
-          </Grid>
-        </Box>
-      
+          {!login ? (
+            <Login setLogin={setLogin} />
+          ) : (
+            <LoginUserContext.Provider value={{ login, setLogin }}>
+              <BrowserRouter>
+                <Grid
+                  item
+                  xs={12}
+                  sm={4.5}
+                  md={4}
+                  lg={4}
+                  sx={{
+                    borderRight: 1,
+                    borderColor: 'secondary.dark',
+                    height: '90vh',
+                  }}
+                >
+                  <SideBar />
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  sm={7.5}
+                  md={8}
+                  lg={8}
+                  sx={{ height: '90vh' }}
+                >
+                  <Routes>
+                    <Route path="/rooms/:roomId" element={<Chat />} />
+                    <Route path="/" element={<Hero />} />
+                  </Routes>
+                </Grid>
+              </BrowserRouter>
+            </LoginUserContext.Provider>
+          )}
+        </Grid>
+      </Box>
     </ThemeProvider>
   );
 }

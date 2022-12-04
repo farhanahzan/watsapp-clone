@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import MoodRoundedIcon from '@mui/icons-material/MoodRounded';
 import MicRoundedIcon from '@mui/icons-material/MicRounded';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
@@ -16,12 +16,16 @@ import { Box } from '@mui/system';
 import { db, storage } from '../../firebase';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import SendImage from './SendImage';
+import { LoginUserContext } from '../../App';
 
 function ChatFooter() {
   const [input, setInput] = useState('');
+  const [caption, setCaption] = useState('');
   const [showPicker, setShowPicker] = useState(false);
   const [show, setShow] = useState(false);
   const [file, setFile] = useState('');
+
+  const { login } = useContext(LoginUserContext);
 
   const onEmojiClick = (event, emojiObject) => {
     setInput((prevInput) => prevInput + emojiObject.emoji);
@@ -37,8 +41,9 @@ function ChatFooter() {
       .doc(roomId)
       .collection('messages')
       .add({
+        imagecaption: '',
         message: input || photourl,
-        name: 'Aneek',
+        name: login.displayName,
         timestamp: serverTimestamp(),
       });
 
@@ -46,10 +51,12 @@ function ChatFooter() {
   };
   const handlePhotoURL = (photourl) => {
     db.collection('rooms').doc(roomId).collection('messages').add({
+      imagecaption: caption,
       message: photourl,
-      name: 'Aneek',
+      name: login.displayName,
       timestamp: serverTimestamp(),
     });
+    setCaption('');
     setShow(false);
   };
   const handleFile = (e) => {
@@ -74,10 +81,7 @@ function ChatFooter() {
       (err) => console.log(err),
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-          //setInput(url);
           handlePhotoURL(url);
-          console.log(url);
-          console.log('input 1', input);
         });
       }
     );
@@ -102,6 +106,7 @@ function ChatFooter() {
           setShow={setShow}
           file={file}
           handleUpload={handleUpload}
+          setCaption={setCaption}
         />
       )}
       <form
@@ -122,7 +127,10 @@ function ChatFooter() {
           <Input
             startAdornment={
               <InputAdornment position="start">
-                <MoodRoundedIcon onClick={() => setShowPicker((val) => !val)} />
+                <MoodRoundedIcon
+                  sx={{ cursor: 'pointer' }}
+                  onClick={() => setShowPicker((val) => !val)}
+                />
               </InputAdornment>
             }
             endAdornment={
@@ -151,7 +159,7 @@ function ChatFooter() {
             }
             sx={{ fontSize: 14, width: '100%' }}
             placeholder="Type the message"
-            type="Search"
+            type="text"
             disableUnderline={true}
             value={input}
             onChange={(e) => setInput(e.target.value)}

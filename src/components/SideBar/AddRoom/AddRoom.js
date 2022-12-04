@@ -16,7 +16,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { Alert, IconButton } from '@mui/material';
 
 function AddRoom({ show, setShow }) {
-  const [open, setOpen] = React.useState(true);
+  //const [open, setOpen] = React.useState(true);
 
   const checkUpload = useRef(0);
   const previous_image = useRef([]);
@@ -100,8 +100,7 @@ function AddRoom({ show, setShow }) {
     } else if (data.name.length === 0 && data.photo.length > 0) {
       handleDelete(data.file.name);
     }
-
-    setOpen(false);
+    setShow(false);
     checkUpload.current = 0;
     previous_image.current = [];
   };

@@ -65,7 +65,7 @@ function ChatTop({ roomData, messages }) {
                   ? messages[messages.length - 1].timestamp
                     ? new Date(
                         messages[messages.length - 1]?.timestamp?.toDate()
-                      ).toUTCString()
+                      ).toLocaleTimeString()
                     : 'Mon, 01 Jan 2022 00:00:00 GMT'
                   : 'not available'}
               </Typography>
