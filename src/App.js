@@ -80,7 +80,7 @@ function App() {
           container
           item
           sx={{
-            backgroundColor: 'secondary.main',
+            backgroundColor: 'secondary.light',
             height: '90vh',
             boxShadow: 4,
             alignItems: 'center',

@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Stack } from '@mui/material';
 import React from 'react';
 
 function Hero() {
@@ -14,21 +14,25 @@ function Hero() {
         backgroundColor: 'secondary.light',
       }}
     >
-      <Typography
-        align="center"
-        variant="h2"
+      <Stack
         sx={{
           width: '70%',
           fontWeight: 300,
           borderRadius: '18px',
           background: '#ffffff',
-          boxShadow: '20px 20px 60px #d9d9d9,20px -20px 60px #ffffff',
+          boxShadow: '10px 10px 30px #d9d9d9,10px 10px 30px #ffffff',
           py: 2,
-          px: 2,
+          px: 4,
         }}
       >
-        Have a Break,Have a Chat
-      </Typography>
+        <Typography align="left" variant="h2">
+          Have a Break
+        </Typography>
+        <Typography align="right" variant="h2">
+          Have a Chat
+        </Typography>
+      </Stack>
+      <Stack></Stack>
     </Box>
   );
 }

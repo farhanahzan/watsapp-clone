@@ -45,6 +45,8 @@ function ChatFooter() {
         message: input || photourl,
         name: login.displayName,
         timestamp: serverTimestamp(),
+        userUID: login.uid,
+        reacted: false,
       });
 
     setInput('');
@@ -55,6 +57,8 @@ function ChatFooter() {
       message: photourl,
       name: login.displayName,
       timestamp: serverTimestamp(),
+      userUID: login.uid,
+      reacted: false,
     });
     setCaption('');
     setShow(false);

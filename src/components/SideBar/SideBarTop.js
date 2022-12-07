@@ -9,12 +9,12 @@ import IconButton from '@mui/material/IconButton';
 import AddRoom from './AddRoom/AddRoom';
 import { LoginUserContext } from '../../App';
 import { useNavigate } from 'react-router-dom';
+import StyleAvatar from './StyleAvatar/StyleAvatar';
 
 function SideBarTop() {
   const [show, setShow] = useState(false);
   const history = useNavigate();
   const { login, setLogin } = useContext(LoginUserContext);
-
   const handleOpenModal = () => {
     setShow(true);
   };
@@ -22,17 +22,7 @@ function SideBarTop() {
     <>
       {show && <AddRoom show={show} setShow={setShow} />}
       <Grid item xs={2}>
-        <Avatar
-          sx={{
-            border: 1,
-            borderColor: 'neutral2.main',
-            boxShadow: 8,
-            width: 46,
-            height: 46,
-          }}
-          alt={login.displayName}
-          src={login.photoURL}
-        />
+        <StyleAvatar alt={login.displayName} src={login.photoURL} />
       </Grid>
       <Grid
         item
