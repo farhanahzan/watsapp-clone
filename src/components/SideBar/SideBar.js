@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import SideBarTop from './SideBarTop';
 import SideBarSearch from './SideBarSearch';
 import SideBarChat from './SideBarChat';
+import AddUser from './AddUser/AddUser';
 
 function SideBar() {
   const [rooms, setRooms] = useState([]);
@@ -31,6 +32,7 @@ function SideBar() {
       clearTimeout();
     };
   }, []);
+
   const filteredRooms = useMemo(() => {
     return rooms.filter((room) => {
       return room.data.name.toLowerCase().includes(query.toLowerCase());

@@ -61,7 +61,7 @@ export default function ToolTip({
     return verify;
   };
   const increace = (e) => {
-    if (message.userUID !== login.uid && !verifyAlreadyReacted()) {
+    if (message.data.userUID !== login.uid && !verifyAlreadyReacted()) {
       db.collection('rooms')
         .doc(roomId)
         .collection('messages')
@@ -71,10 +71,9 @@ export default function ToolTip({
           emotion: e.target.id,
           name: login.displayName,
           uid: login.uid,
-        })
-        .then(() => {});
+        });
     } else if (
-      message.userUID !== login.uid &&
+      message.data.userUID !== login.uid &&
       verifyAlreadyReacted() &&
       whenSameEmotion(e)
     ) {
@@ -87,9 +86,7 @@ export default function ToolTip({
         .update({
           emotion: e.target.id,
         })
-        .then(() => {
-          console.log('updated');
-        })
+
         .catch((err) => console.log(err));
     } else {
       return;

@@ -46,7 +46,6 @@ function ChatFooter() {
         name: login.displayName,
         timestamp: serverTimestamp(),
         userUID: login.uid,
-        reacted: false,
       });
 
     setInput('');
@@ -58,7 +57,6 @@ function ChatFooter() {
       name: login.displayName,
       timestamp: serverTimestamp(),
       userUID: login.uid,
-      reacted: false,
     });
     setCaption('');
     setShow(false);

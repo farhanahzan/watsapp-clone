@@ -7,10 +7,10 @@ import CardHeader from '@mui/material/CardHeader';
 import Avatar from '@mui/material/Avatar';
 
 import Typography from '@mui/material/Typography';
-import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import AttachFileRoundedIcon from '@mui/icons-material/AttachFileRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import IconButton from '@mui/material/IconButton';
+import SearchMessage from './Search Message/SearchMessage';
 
 function ChatTop({ roomData, messages }) {
   //console.log('message', messages)
@@ -62,9 +62,9 @@ function ChatTop({ roomData, messages }) {
               >
                 last seen{' '}
                 {messages.length > 0
-                  ? messages[messages.length - 1].timestamp
+                  ? messages[messages.length - 1].data.timestamp
                     ? new Date(
-                        messages[messages.length - 1]?.timestamp?.toDate()
+                        messages[messages.length - 1].data?.timestamp?.toDate()
                       ).toLocaleTimeString()
                     : 'Mon, 01 Jan 2022 00:00:00 GMT'
                   : 'not available'}
@@ -74,9 +74,7 @@ function ChatTop({ roomData, messages }) {
         </Card>
       </Grid>
       <Grid item xs={4} display="flex" justifyContent="flex-end">
-        <IconButton>
-          <SearchRoundedIcon sx={{ color: 'secondary.light' }} />
-        </IconButton>
+        <SearchMessage messages={messages.data} />
         <IconButton>
           <AttachFileRoundedIcon sx={{ color: 'secondary.light' }} />
         </IconButton>

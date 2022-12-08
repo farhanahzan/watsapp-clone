@@ -34,16 +34,15 @@ function ChatMessage({ msg, login, id, handleImagePreview }) {
         )
       );
   }, [roomId, msg.id]);
-
   return (
     <Stack
       direction="column"
-      alignItems={msg.userUID === login.uid ? 'flex-end' : 'flex-start'}
+      alignItems={msg.data.userUID === login.uid ? 'flex-end' : 'flex-start'}
       spacing={0}
     >
       <ToolTip
         place={
-          msg.userUID === login.uid
+          msg.data.userUID === login.uid
             ? id === 0
               ? 'left'
               : 'left-end'
@@ -64,7 +63,9 @@ function ChatMessage({ msg, login, id, handleImagePreview }) {
             px: 0,
             py: 0.2,
             borderRadius: '10px',
-            bgcolor: `${msg.userUID === login.uid ? '#075e54' : '#5e0707'}`,
+            bgcolor: `${
+              msg.data.userUID === login.uid ? '#075e54' : '#5e0707'
+            }`,
             position: 'relative',
           }}
         >
@@ -79,15 +80,15 @@ function ChatMessage({ msg, login, id, handleImagePreview }) {
               paddingLeft: 1,
             }}
           >
-            {msg.name}
+            {msg.data.name}
           </Typography>
-          {msg.message.includes(
+          {msg.data.message.includes(
             'https://firebasestorage.googleapis.com/v0/b/watsapp-clone-60f2d.appspot.com/o/chats'
           ) ? (
             <>
               <div
                 onClick={() => {
-                  handleImagePreview(msg.message);
+                  handleImagePreview(msg.data.message);
                 }}
               >
                 <PregressiveImage
@@ -97,7 +98,7 @@ function ChatMessage({ msg, login, id, handleImagePreview }) {
                     background: '#ffffff',
                     pointerEvents: 'all',
                   }}
-                  imgSrc={msg.message}
+                  imgSrc={msg.data.message}
                   previewSrc={PlaceholdeImg}
                 />
               </div>
@@ -111,7 +112,7 @@ function ChatMessage({ msg, login, id, handleImagePreview }) {
                   overflowWrap: 'anywhere',
                 }}
               >
-                {msg.imagecaption ? msg.imagecaption : null}
+                {msg.data.imagecaption ? msg.data.imagecaption : null}
               </Typography>
             </>
           ) : (
@@ -126,7 +127,7 @@ function ChatMessage({ msg, login, id, handleImagePreview }) {
                 lineHeight: '1.2rem',
               }}
             >
-              {msg.message}{' '}
+              {msg.data.message}{' '}
             </Typography>
           )}
           <Stack
@@ -146,8 +147,8 @@ function ChatMessage({ msg, login, id, handleImagePreview }) {
                 lineHeight: 1,
               }}
             >
-              {msg.timestamp
-                ? new Date(msg?.timestamp?.toDate()).toLocaleTimeString()
+              {msg.data.timestamp
+                ? new Date(msg.data?.timestamp?.toDate()).toLocaleTimeString()
                 : '00:00:00 AM'}
             </Typography>
           </Stack>

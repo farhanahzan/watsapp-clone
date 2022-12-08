@@ -40,7 +40,7 @@ function SendImage({ show, setShow, file, handleUpload, setCaption }) {
           variant="standard"
           InputProps={{
             endAdornment: (
-              <InputAdornment>
+              <InputAdornment position="end">
                 <SendRoundedIcon
                   sx={{ cursor: 'pointer', color: 'primary.main' }}
                   onClick={handleUpload}

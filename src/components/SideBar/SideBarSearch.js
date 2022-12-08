@@ -3,10 +3,14 @@ import React from 'react';
 import InputAdornment from '@mui/material/InputAdornment';
 import Input from '@mui/material/Input';
 import FormControl from '@mui/material/FormControl';
-
+import SearchOffRoundedIcon from '@mui/icons-material/SearchOffRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
-function SideBarSearch({ query, setQuery }) {
+function SideBarSearch({ query, setQuery, chat, setShow }) {
+  const handleClose = () => {
+    setShow(false);
+    setQuery('');
+  };
   return (
     <>
       <FormControl
@@ -24,13 +28,26 @@ function SideBarSearch({ query, setQuery }) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           sx={{ fontSize: 12, width: '100%' }}
-          placeholder="Search Room"
+          placeholder={chat ? 'Search Message' : 'Search Room'}
           type="search"
           disableUnderline={true}
           startAdornment={
-            <InputAdornment position="start">
-              <SearchRoundedIcon />
-            </InputAdornment>
+            !chat ? (
+              <InputAdornment position="start">
+                <SearchRoundedIcon />
+              </InputAdornment>
+            ) : null
+          }
+          endAdornment={
+            chat ? (
+              <InputAdornment
+                sx={{ cursor: 'pointer' }}
+                position="end"
+                onClick={handleClose}
+              >
+                <SearchOffRoundedIcon />
+              </InputAdornment>
+            ) : null
           }
         />
       </FormControl>

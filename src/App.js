@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Chat from './components/Chat/Chat';
 import SideBar from './components/SideBar/SideBar';
@@ -13,7 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './components/Login/Login';
 import Hero from './components/WelcomeScreen/Hero';
-
+import { db, auth } from './firebase';
 export const LoginUserContext = React.createContext();
 
 const theme = createTheme({
@@ -63,6 +63,51 @@ function App() {
       ? JSON.parse(sessionStorage.getItem('user'))
       : ''
   );
+  const [allUsers, setAllUsers] = useState([]);
+  const curruser = auth.currentUser;
+  console.log(auth.currentUser);
+  useEffect(() => {
+    const unsubcribe = db.collection('users').onSnapshot((snapshot) => {
+      setAllUsers(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        }))
+      );
+    });
+
+    return () => {
+      unsubcribe();
+    };
+  }, []);
+  const verifyUserAlreadyRegistered = () => {
+    let verify = false;
+    if (allUsers.length > 0) {
+      verify = allUsers.some((item) => item.data.uid == login.uid);
+    }
+    console.log(verify);
+    return verify;
+  };
+  console.log(allUsers);
+  useEffect(() => {
+    if (!verifyUserAlreadyRegistered() && allUsers.length > 0 && login) {
+      if (curruser !== null) {
+        db.collection('users')
+          .add({
+            displayName: curruser.displayName,
+            email: curruser.email,
+            lastLoginAt: curruser.metadata.lastSignInTime,
+            createdAt: curruser.metadata.creationTime,
+            photoURL: curruser.photoURL,
+            uid: curruser.uid,
+          })
+          .then(() => {
+            console.log('user Added');
+          })
+          .catch((err) => console.log(err));
+      }
+    }
+  }, [login, allUsers.length]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -93,7 +138,9 @@ function App() {
           {!login ? (
             <Login setLogin={setLogin} />
           ) : (
-            <LoginUserContext.Provider value={{ login, setLogin }}>
+            <LoginUserContext.Provider
+              value={{ login, setLogin, allUsers, setAllUsers }}
+            >
               <BrowserRouter>
                 <Grid
                   item

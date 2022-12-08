@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useContext, useState } from 'react';
+import React, { useEffect, useRef, useContext, useState, useMemo } from 'react';
 
 import { LoginUserContext } from '../../App';
 
@@ -6,6 +6,8 @@ import EnlargeImageView from './ImageEnlarger/EnlargeImageView';
 
 import { useParams } from 'react-router-dom';
 import { db } from '../../firebase';
+
+import { MessageContext } from './Chat';
 
 import ChatMessage from './ChatMessage';
 
@@ -19,17 +21,7 @@ function ChatBody({ messages }) {
   const [showEnlarge, setShowEnlarge] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
 
-  useEffect(() => {
-    if (roomId) {
-      db.collection('rooms')
-        .doc(roomId)
-        .collection('messages')
-        .orderBy('timestamp', 'asc')
-        .onSnapshot((snapshot) =>
-          setGetmsgId(snapshot.docs.map((doc) => doc.id))
-        );
-    }
-  }, [roomId]);
+  const { query, setQuery } = useContext(MessageContext);
 
   const handleImagePreview = (url) => {
     setShowEnlarge(true);
@@ -38,12 +30,13 @@ function ChatBody({ messages }) {
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
-  //const [showRight, setShowRight] = useState('');
+  }, [messages.data]);
 
-  for (let i = 0; i < messages.length; i++) {
-    messages[i]['id'] = getmsgId[i];
-  }
+  const filteredMessage = useMemo(() => {
+    return messages.filter((message) => {
+      return message.data.message.toLowerCase().includes(query.toLowerCase());
+    });
+  }, [messages, query]);
 
   return (
     <>
@@ -53,7 +46,7 @@ function ChatBody({ messages }) {
         previewImage={previewImage}
         setPreviewImage={setPreviewImage}
       />
-      {messages.map((msg, id) => (
+      {filteredMessage.map((msg, id) => (
         <ChatMessage
           key={id}
           id={id}
