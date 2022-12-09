@@ -65,7 +65,6 @@ function App() {
   );
   const [allUsers, setAllUsers] = useState([]);
   const curruser = auth.currentUser;
-  console.log(auth.currentUser);
   useEffect(() => {
     const unsubcribe = db.collection('users').onSnapshot((snapshot) => {
       setAllUsers(
@@ -83,12 +82,10 @@ function App() {
   const verifyUserAlreadyRegistered = () => {
     let verify = false;
     if (allUsers.length > 0) {
-      verify = allUsers.some((item) => item.data.uid == login.uid);
+      verify = allUsers.some((item) => item.data.uid === login.uid);
     }
-    console.log(verify);
     return verify;
   };
-  console.log(allUsers);
   useEffect(() => {
     if (!verifyUserAlreadyRegistered() && allUsers.length > 0 && login) {
       if (curruser !== null) {
@@ -101,9 +98,7 @@ function App() {
             photoURL: curruser.photoURL,
             uid: curruser.uid,
           })
-          .then(() => {
-            console.log('user Added');
-          })
+
           .catch((err) => console.log(err));
       }
     }

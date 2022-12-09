@@ -1,7 +1,7 @@
-import { IconButton, TextField } from '@mui/material';
+import { IconButton } from '@mui/material';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState } from 'react';
 import SideBarSearch from '../../SideBar/SideBarSearch';
 import { Stack } from '@mui/system';
 

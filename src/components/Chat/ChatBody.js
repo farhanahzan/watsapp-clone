@@ -4,24 +4,18 @@ import { LoginUserContext } from '../../App';
 
 import EnlargeImageView from './ImageEnlarger/EnlargeImageView';
 
-import { useParams } from 'react-router-dom';
-import { db } from '../../firebase';
-
 import { MessageContext } from './Chat';
 
 import ChatMessage from './ChatMessage';
 
 function ChatBody({ messages }) {
-  const { roomId } = useParams();
-  const [getmsgId, setGetmsgId] = useState('');
-
   const messagesEndRef = useRef(null);
   const { login } = useContext(LoginUserContext);
 
   const [showEnlarge, setShowEnlarge] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
 
-  const { query, setQuery } = useContext(MessageContext);
+  const { query } = useContext(MessageContext);
 
   const handleImagePreview = (url) => {
     setShowEnlarge(true);

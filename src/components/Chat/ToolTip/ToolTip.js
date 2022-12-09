@@ -38,7 +38,7 @@ export default function ToolTip({
 
   const verifyAlreadyReacted = () => {
     let verify = false;
-    verify = emoji.some((item) => item.data.uid == login.uid);
+    verify = emoji.some((item) => item.data.uid === login.uid);
 
     if (verify) {
       emoji.map((em, keys) => {
@@ -52,7 +52,7 @@ export default function ToolTip({
   const whenSameEmotion = (e) => {
     let verify = false;
     emoji.map((em) => {
-      if ((em.data.uid === login.uid && em.data.emotion) == e.target.id) {
+      if ((em.data.uid === login.uid && em.data.emotion) === e.target.id) {
         verify = false;
       } else {
         verify = true;

@@ -5,7 +5,6 @@ import Grid from '@mui/material/Grid';
 import SideBarTop from './SideBarTop';
 import SideBarSearch from './SideBarSearch';
 import SideBarChat from './SideBarChat';
-import AddUser from './AddUser/AddUser';
 
 function SideBar() {
   const [rooms, setRooms] = useState([]);
