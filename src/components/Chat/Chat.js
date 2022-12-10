@@ -6,36 +6,21 @@ import ChatFooter from './ChatFooter';
 import background_body from '../../assets/watapp_wallpaper1.jpg';
 import { useParams } from 'react-router-dom';
 import { db } from '../../firebase';
+
+import UseGetMsgCollections from '../../CustomHooks/useGetMsgCollection';
+import UseGetSingleRoomDetails from '../../CustomHooks/UseGetSingleRoomDetails';
+import useUsersInaGroup from '../../CustomHooks/useUsersInaGroup';
 export const MessageContext = createContext();
 
 function Chat() {
   const { roomId } = useParams();
 
-  const [roomData, setRoomData] = useState('');
-  const [messages, setMessages] = useState([]);
   const [query, setQuery] = useState('');
 
-  useEffect(() => {
-    if (roomId) {
-      db.collection('rooms')
-        .doc(roomId)
-        .onSnapshot((snapshort) => setRoomData(snapshort.data()));
-
-      db.collection('rooms')
-        .doc(roomId)
-        .collection('messages')
-        .orderBy('timestamp', 'asc')
-        .onSnapshot((snapshot) =>
-          setMessages(
-            snapshot.docs.map((doc) => ({
-              id: doc.id,
-              data: doc.data(),
-            }))
-          )
-        );
-    }
-  }, [roomId]);
-
+  const roomData = UseGetSingleRoomDetails(roomId, db).data;
+  const messages = UseGetMsgCollections(roomId, db).data;
+  const usersinroom = useUsersInaGroup(roomId, db);
+  console.log(usersinroom);
   return (
     <MessageContext.Provider value={{ messages, query, setQuery }}>
       <Grid
@@ -54,7 +39,11 @@ function Chat() {
           justifyContent="space-between"
           sx={{ bgcolor: 'primary.dark', height: '12vh', px: 2 }}
         >
-          <ChatTop roomData={roomData} messages={messages} />
+          <ChatTop
+            roomData={roomData}
+            messages={messages}
+            usersinroom={usersinroom}
+          />
         </Grid>
         <Grid
           item

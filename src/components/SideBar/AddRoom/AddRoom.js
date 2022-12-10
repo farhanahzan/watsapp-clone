@@ -100,7 +100,7 @@ function AddRoom({ show, setShow }) {
     } else if (data.name.length === 0 && data.photo.length > 0) {
       handleDelete(data.file.name);
     }
-    setShow(false);
+    setShow(data.photo ? false : true);
     checkUpload.current = 0;
     previous_image.current = [];
   };
@@ -199,7 +199,7 @@ function AddRoom({ show, setShow }) {
               />
             }
           >
-            Upload
+            Click to Upload
           </Button>
         ) : null}
         <TextField

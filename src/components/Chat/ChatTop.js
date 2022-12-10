@@ -4,18 +4,26 @@ import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 
-import Avatar from '@mui/material/Avatar';
+import { useState } from 'react';
 
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import AttachFileRoundedIcon from '@mui/icons-material/AttachFileRounded';
+import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import IconButton from '@mui/material/IconButton';
 import SearchMessage from './Search Message/SearchMessage';
+import TeamUsers from './UsersList/TeamUsers';
 
-function ChatTop({ roomData, messages }) {
-  //console.log('message', messages)
+function ChatTop({ roomData, messages, usersinroom }) {
+  const [show, setShow] = useState(false);
   return (
     <>
+      {show ? (
+        <Stack sx={{ position: 'absolute', right: 0, top: '86px' }}>
+          <TeamUsers usersinroom={usersinroom} />
+        </Stack>
+      ) : null}
       <Grid item xs={8}>
         <Card
           sx={{
@@ -75,8 +83,8 @@ function ChatTop({ roomData, messages }) {
       </Grid>
       <Grid item xs={4} display="flex" justifyContent="flex-end">
         <SearchMessage messages={messages.data} />
-        <IconButton>
-          <AttachFileRoundedIcon sx={{ color: 'secondary.light' }} />
+        <IconButton onClick={() => setShow(!show)}>
+          <PeopleAltRoundedIcon sx={{ color: 'secondary.light' }} />
         </IconButton>
         <IconButton>
           <MoreVertRoundedIcon sx={{ color: 'secondary.light' }} />

@@ -7,6 +7,7 @@ import EnlargeImageView from './ImageEnlarger/EnlargeImageView';
 import { MessageContext } from './Chat';
 
 import ChatMessage from './ChatMessage';
+import DataFilter from '../../CustomHooks/DataFilter';
 
 function ChatBody({ messages }) {
   const messagesEndRef = useRef(null);
@@ -26,11 +27,7 @@ function ChatBody({ messages }) {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages.data]);
 
-  const filteredMessage = useMemo(() => {
-    return messages.filter((message) => {
-      return message.data.message.toLowerCase().includes(query.toLowerCase());
-    });
-  }, [messages, query]);
+  const filteredMessage = DataFilter(messages, query);
 
   return (
     <>

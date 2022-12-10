@@ -94,8 +94,9 @@ export default function ToolTip({
   };
   const style = {
     cursor: 'pointer',
-    padding: '1px',
+
     fontSize: '20px',
+    height: '25px',
     backgroundColor: 'transparent',
   };
 
