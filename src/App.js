@@ -96,7 +96,7 @@ function App() {
         })
         .catch((err) => console.log(err));
     }
-  }, [login, userData.length]);
+  }, [login, userData.length, findId]);
   return (
     <ThemeProvider theme={theme}>
       <Box

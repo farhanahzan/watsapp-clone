@@ -35,7 +35,7 @@ function EnlargeImageView({
           <img
             style={{ maxHeight: '90vh' }}
             src={previewImage}
-            alt="full size image"
+            alt=" fullview"
           />
         </Box>
       </Modal>
