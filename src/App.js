@@ -67,7 +67,6 @@ function App() {
   );
 
   const curruser = auth.currentUser;
-  console.log(curruser);
   const userData = UseGetCollections('users', db).data;
   const verifyUid = UseVerifyAlreadyExists(userData, login, 'uid');
   const findId = FindCurrentUserId(auth, userData);
@@ -88,7 +87,6 @@ function App() {
       }
     }
     if (findId) {
-      console.log('called');
       db.collection('users')
         .doc(findId?.id)
         .update({

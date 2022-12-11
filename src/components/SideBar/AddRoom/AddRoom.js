@@ -11,7 +11,7 @@ import AddPhotoAlternateRoundedIcon from '@mui/icons-material/AddPhotoAlternateR
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 import ModeRoundedIcon from '@mui/icons-material/ModeRounded';
 
-import { db, storage } from '../../../firebase';
+import { db, storage, auth } from '../../../firebase';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { Alert, IconButton } from '@mui/material';
 
@@ -88,12 +88,14 @@ function AddRoom({ show, setShow }) {
   const handleClose = () => {
     setShow(false);
   };
+  const curruser = auth.currentUser;
 
   const handleSubmit = () => {
     if (data.name.length > 0 && data.photo.length > 0 && data.file) {
       db.collection('rooms').add({
         name: data.name,
         roomPhoto: data.photo,
+        createdBy: curruser.uid,
       });
     } else if (data.name.length === 0 && data.photo.length > 0) {
       handleDelete(data.file.name);

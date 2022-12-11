@@ -10,10 +10,11 @@ import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
-import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
+
 import IconButton from '@mui/material/IconButton';
 import SearchMessage from './Search Message/SearchMessage';
 import TeamUsers from './UsersList/TeamUsers';
+import DeleteRoom from './DeleteRoom/DeleteRoom';
 
 function ChatTop({ roomData, messages, usersinroom }) {
   const [show, setShow] = useState(false);
@@ -95,9 +96,7 @@ function ChatTop({ roomData, messages, usersinroom }) {
         <IconButton onClick={() => setShow(true)}>
           <PeopleAltRoundedIcon sx={{ color: 'secondary.light' }} />
         </IconButton>
-        <IconButton>
-          <MoreVertRoundedIcon sx={{ color: 'secondary.light' }} />
-        </IconButton>
+        <DeleteRoom roomData={roomData} />
       </Grid>
     </>
   );

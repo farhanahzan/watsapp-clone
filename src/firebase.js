@@ -5,12 +5,12 @@ import 'firebase/compat/storage';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyABOqNaNbsQWN82M2_vxVNyCS-ehBrBX58',
-  authDomain: 'watsapp-clone-60f2d.firebaseapp.com',
-  projectId: 'watsapp-clone-60f2d',
-  storageBucket: 'watsapp-clone-60f2d.appspot.com',
-  messagingSenderId: '223330330626',
-  appId: '1:223330330626:web:070da3d9450faae9e19f1b',
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_PROJECT_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MSG_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
 };
 
 // Initialize Firebase
