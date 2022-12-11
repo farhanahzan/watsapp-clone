@@ -15,6 +15,7 @@ import Hero from './components/WelcomeScreen/Hero';
 import { db, auth } from './firebase';
 import UseGetCollections from './CustomHooks/UseGetCollections';
 import UseVerifyAlreadyExists from './CustomHooks/UseVerifyAlreadyExists';
+import FindCurrentUserId from './CustomHooks/FindCurrentUserId';
 export const LoginUserContext = React.createContext();
 
 const theme = createTheme({
@@ -66,10 +67,10 @@ function App() {
   );
 
   const curruser = auth.currentUser;
-
+  console.log(curruser);
   const userData = UseGetCollections('users', db).data;
   const verifyUid = UseVerifyAlreadyExists(userData, login, 'uid');
-
+  const findId = FindCurrentUserId(auth, userData);
   useEffect(() => {
     if (!verifyUid && userData.length > 0 && login) {
       if (curruser !== null) {
@@ -86,14 +87,26 @@ function App() {
           .catch((err) => console.log(err));
       }
     }
+    if (findId) {
+      console.log('called');
+      db.collection('users')
+        .doc(findId?.id)
+        .update({
+          lastLoginAt: curruser.metadata.lastSignInTime,
+        })
+        .catch((err) => console.log(err));
+    }
   }, [login, userData.length]);
   return (
     <ThemeProvider theme={theme}>
       <Box
         sx={{
           flexGrow: 1,
-          backgroundImage:
-            ' radial-gradient(circle, #6ea6a9, #59959e, #458393, #337288, #22617c, #185471, #0f4766, #083a5b, #042e4f, #022343, #001937, #000b2b)',
+          background: '#FEAC5E',
+          background:
+            '-webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E)',
+          background: 'linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E) ',
+
           height: '100vh',
           display: 'grid',
           placeItems: 'center',
@@ -104,7 +117,7 @@ function App() {
           item
           sx={{
             backgroundColor: 'secondary.light',
-            height: '90vh',
+            height: { xs: '100vh', sm: '90vh' },
             boxShadow: 4,
             alignItems: 'center',
             justifyContent: 'center',
@@ -127,7 +140,7 @@ function App() {
                   sx={{
                     borderRight: 1,
                     borderColor: 'secondary.dark',
-                    height: '90vh',
+                    height: { xs: '100vh', sm: '90vh' },
                   }}
                 >
                   <SideBar />
@@ -138,7 +151,7 @@ function App() {
                   sm={7.5}
                   md={8}
                   lg={8}
-                  sx={{ height: '90vh' }}
+                  sx={{ height: { xs: '100vh', sm: '90vh' } }}
                 >
                   <Routes>
                     <Route path="/rooms/:roomId" element={<Chat />} />

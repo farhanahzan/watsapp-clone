@@ -28,7 +28,7 @@ function Login({ setLogin }) {
           py: 6,
           bgcolor: 'hover.main',
           display: 'flex',
-          justifyContent: 'flex-start',
+          justifyContent: { xs: 'center', sm: 'flex-start' },
           flexDirection: 'column',
           alignItems: 'center',
           gap: 1,

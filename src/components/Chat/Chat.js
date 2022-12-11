@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, createContext } from 'react';
 import Grid from '@mui/material/Grid';
 import ChatTop from './ChatTop';
 import ChatBody from './ChatBody';
@@ -50,7 +50,7 @@ function Chat() {
           xs={12}
           sx={{
             backgroundImage: `url(${background_body})`,
-            height: '71vh',
+            height: { xs: '100vh', sm: '70vh' },
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
@@ -69,7 +69,7 @@ function Chat() {
           item
           xs={12}
           sx={{
-            position: 'absolute',
+            position: 'relative',
             bottom: 0,
             bgcolor: 'secondary.light',
             width: '100%',
@@ -78,6 +78,7 @@ function Chat() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
+            height: '8vh',
           }}
         >
           <ChatFooter />

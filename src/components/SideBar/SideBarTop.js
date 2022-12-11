@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import Grid from '@mui/material/Grid';
 
-import Avatar from '@mui/material/Avatar';
 import DonutLargeRoundedIcon from '@mui/icons-material/DonutLargeRounded';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';

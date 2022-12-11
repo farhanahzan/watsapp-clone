@@ -16,8 +16,6 @@ import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { Alert, IconButton } from '@mui/material';
 
 function AddRoom({ show, setShow }) {
-  //const [open, setOpen] = React.useState(true);
-
   const checkUpload = useRef(0);
   const previous_image = useRef([]);
 

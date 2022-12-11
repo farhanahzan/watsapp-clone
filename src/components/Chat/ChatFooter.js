@@ -2,12 +2,10 @@ import React, { useState, useContext } from 'react';
 import MoodRoundedIcon from '@mui/icons-material/MoodRounded';
 import MicRoundedIcon from '@mui/icons-material/MicRounded';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
-import AttachFileRoundedIcon from '@mui/icons-material/AttachFileRounded';
 import Input from '@mui/material/Input';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
 
 import { serverTimestamp } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
@@ -17,7 +15,6 @@ import { db, storage } from '../../firebase';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import SendImage from './SendImage';
 import { LoginUserContext } from '../../App';
-import { Speed } from '@mui/icons-material';
 import Attachments from './Attachments/Attachments';
 
 function ChatFooter() {

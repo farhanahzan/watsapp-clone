@@ -6,7 +6,6 @@ import CameraAltRoundedIcon from '@mui/icons-material/CameraAltRounded';
 import InsertPhotoRoundedIcon from '@mui/icons-material/InsertPhotoRounded';
 import PictureAsPdfRoundedIcon from '@mui/icons-material/PictureAsPdfRounded';
 import TextSnippetRoundedIcon from '@mui/icons-material/TextSnippetRounded';
-import { IconButton } from '@mui/material';
 
 function Attachments({ handleFile }) {
   const uploadImageRef = useRef();

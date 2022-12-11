@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useContext, useState, useMemo } from 'react';
+import React, { useEffect, useRef, useContext, useState } from 'react';
 
 import { LoginUserContext } from '../../App';
 
@@ -26,7 +26,7 @@ function ChatBody({ messages }) {
   const filteredMessage = DataFilter(messages, query);
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [filteredMessage.data]);
+  }, [filteredMessage]);
 
   return (
     <>
