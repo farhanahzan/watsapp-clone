@@ -12,15 +12,4 @@ export default function useUsersInaGroup(roomId, db) {
   });
 
   return filtered;
-
-  // let finddd = userData.find(function (value) {
-  //   return value.data.displayName == 'farhan ahzan';
-  // });
-  // console.log(finddd);
-
-  // let mapped = userData.map((user) => {
-  //   return user.data.uid;
-  // });
-  // console.log(mapped);
-  // return finddd;
 }

@@ -1,6 +1,6 @@
 import { Box, Typography, Stack } from '@mui/material';
 import React from 'react';
-
+import Typewriter from 'typewriter-effect';
 function Hero() {
   return (
     <Box
@@ -25,11 +25,27 @@ function Hero() {
           px: 4,
         }}
       >
-        <Typography align="left" variant="h2">
-          Have a Break
+        <Typography variant="h2" align="left">
+          <Typewriter
+            options={{
+              strings: ['Have a Break'],
+              autoStart: true,
+              loop: true,
+              delay: 75,
+              pauseFor: 1000,
+            }}
+          />
         </Typography>
-        <Typography align="right" variant="h2">
-          Have a Chat
+        <Typography variant="h2" align="right">
+          <Typewriter
+            options={{
+              strings: ['Have a Chat'],
+              autoStart: true,
+              loop: true,
+              delay: 75,
+              pauseFor: 1000,
+            }}
+          />
         </Typography>
       </Stack>
       <Stack></Stack>

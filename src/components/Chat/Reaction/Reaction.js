@@ -24,7 +24,6 @@ export const Reaction = ({ emoji }) => {
     fontFamily: '"Roboto","Helvetica","Arial",sans-serif',
     color: 'rgb(198 198 198)',
   };
-  // console.log(emoji);
 
   const [countEmotion, setCountEmotion] = useState({
     thumpup: 0,

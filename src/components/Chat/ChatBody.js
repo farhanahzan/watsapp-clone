@@ -23,11 +23,10 @@ function ChatBody({ messages }) {
     setPreviewImage(url);
   };
 
+  const filteredMessage = DataFilter(messages, query);
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages.data]);
-
-  const filteredMessage = DataFilter(messages, query);
+  }, [filteredMessage.data]);
 
   return (
     <>

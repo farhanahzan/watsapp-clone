@@ -20,7 +20,7 @@ function Chat() {
   const roomData = UseGetSingleRoomDetails(roomId, db).data;
   const messages = UseGetMsgCollections(roomId, db).data;
   const usersinroom = useUsersInaGroup(roomId, db);
-  console.log(usersinroom);
+
   return (
     <MessageContext.Provider value={{ messages, query, setQuery }}>
       <Grid

@@ -17,6 +17,8 @@ import { db, storage } from '../../firebase';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import SendImage from './SendImage';
 import { LoginUserContext } from '../../App';
+import { Speed } from '@mui/icons-material';
+import Attachments from './Attachments/Attachments';
 
 function ChatFooter() {
   const [input, setInput] = useState('');
@@ -143,19 +145,23 @@ function ChatFooter() {
                     sx={{ cursor: 'pointer' }}
                   />
                 ) : (
-                  <IconButton
-                    sx={{ padding: 1 }}
-                    aria-label="upload picture"
-                    component="label"
-                  >
-                    <input
-                      hidden
-                      onChange={handleFile}
-                      accept="image/*"
-                      type="file"
-                    />
-                    <AttachFileRoundedIcon />
-                  </IconButton>
+                  <Attachments
+                    sx={{ position: 'relative' }}
+                    handleFile={handleFile}
+                  />
+                  // <IconButton
+                  //   sx={{ padding: 1 }}
+                  //   aria-label="upload picture"
+                  //   component="label"
+                  // >
+                  //   <input
+                  //     hidden
+                  //     onChange={handleFile}
+                  //     accept="image/*"
+                  //     type="file"
+                  //   />
+                  //   <AttachFileRoundedIcon />
+                  // </IconButton>
                 )}
               </InputAdornment>
             }
@@ -172,7 +178,7 @@ function ChatFooter() {
         </Button>
       </form>
 
-      <MicRoundedIcon />
+      <MicRoundedIcon sx={{ paddingLeft: '15px' }} />
     </>
   );
 }

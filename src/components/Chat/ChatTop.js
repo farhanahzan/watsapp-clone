@@ -20,8 +20,17 @@ function ChatTop({ roomData, messages, usersinroom }) {
   return (
     <>
       {show ? (
-        <Stack sx={{ position: 'absolute', right: 0, top: '86px' }}>
-          <TeamUsers usersinroom={usersinroom} />
+        <Stack
+          sx={{
+            position: 'absolute',
+            right: 0,
+            top: '86px',
+            zIndex: 3,
+            backgroundColor: 'secondary.light',
+            paddingTop: 1.5,
+          }}
+        >
+          <TeamUsers usersinroom={usersinroom} show={show} setShow={setShow} />
         </Stack>
       ) : null}
       <Grid item xs={8}>
@@ -83,7 +92,7 @@ function ChatTop({ roomData, messages, usersinroom }) {
       </Grid>
       <Grid item xs={4} display="flex" justifyContent="flex-end">
         <SearchMessage messages={messages.data} />
-        <IconButton onClick={() => setShow(!show)}>
+        <IconButton onClick={() => setShow(true)}>
           <PeopleAltRoundedIcon sx={{ color: 'secondary.light' }} />
         </IconButton>
         <IconButton>

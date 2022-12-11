@@ -117,7 +117,6 @@ function AddRoom({ show, setShow }) {
       ...prevState,
       file_preview: '',
     }));
-    console.log('called');
   };
 
   return (
